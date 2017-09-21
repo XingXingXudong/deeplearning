@@ -1,2 +1,2 @@
 # deeplearning
-Deep Learning 课程联系代码
+Deep Learning 课程练习代码
