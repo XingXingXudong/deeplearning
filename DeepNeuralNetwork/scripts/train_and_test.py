@@ -10,7 +10,7 @@ import scipy
 from PIL import Image
 from scipy import ndimage
 from LogisticRegression.scripts.lr_utils import load_dataset
-from LogisticRegression.scripts.lr_model import LogisticRegression
+from DeepNeuralNetwork.scripts.dnn2 import DNN2
 
 train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = load_dataset()
 
@@ -24,15 +24,15 @@ test_set_x_flatten = test_set_x_orig.reshape(test_set_x_orig.shape[0], -1).T
 train_set_x = train_set_x_flatten / 255
 test_set_x = test_set_x_flatten / 255
 
-print(train_set_x.shape)
-print(test_set_y.shape)
+dnn = DNN2(layers_dims=[12288, 10, 1])
+dnn.fit(train_set_x, train_set_y)
 
-lr = LogisticRegression(num_iterations=400, learning_rate=0.0002, print_cost=True)
-lr.fit(train_set_x, train_set_y)
-train_error = lr.score(train_set_x, train_set_y)
-print('Train error rate: ', train_error)
-test_error = lr.score(test_set_x, test_set_y)
-print('Test error rate: ', test_error)
-
-plt.plot(lr.costs_)
-plt.show()
+# lr = LogisticRegression(num_iterations=4000, learning_rate=0.002, print_cost=True)
+# lr.fit(train_set_x, train_set_y)
+# train_error = lr.score(train_set_x, train_set_y)
+# print('Train error rate: ', train_error)
+# test_error = lr.score(test_set_x, test_set_y)
+# print('Test error rate: ', test_error)
+#
+# plt.plot(lr.costs_)
+# plt.show()
